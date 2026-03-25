@@ -997,12 +997,12 @@ _ස්තූතියි!_`).then(() => {
 					method2Success = true
 				} catch {}
 
-				// Method 3: chatModify delete (archive + clear)
+				// Method 3: chatModify delete — DISABLED (bot crash වෙනවා)
 				let method3Success = false
-				try {
-					await nimesha.chatModify({ delete: true, lastMessages: [{ key: m.key, messageTimestamp: m.timestamp }] }, m.chat)
-					method3Success = true
-				} catch {}
+				// try {
+				// 	await nimesha.chatModify({ delete: true, lastMessages: [{ key: m.key, messageTimestamp: m.timestamp }] }, m.chat)
+				// 	method3Success = true
+				// } catch {}
 
 				const anySuccess = method1Success || method2Success || method3Success
 				try {
