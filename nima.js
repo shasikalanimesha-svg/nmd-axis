@@ -1,5 +1,5 @@
-process.once('uncaughtException', console.error)
-process.once('unhandledRejection', console.error)
+process.on('uncaughtException', (err) => console.error('[uncaughtException]', err))
+process.on('unhandledRejection', (err) => console.error('[unhandledRejection]', err))
 
 /*
 	* Create By Nimesha Madhushan
@@ -2164,7 +2164,13 @@ _ස්තූතියි!_`).then(() => {
 				if (!m.isGroup) return m.reply(mess.group)
 				if (!m.isAdmin) return m.reply(mess.admin)
 				if (!m.isBotAdmin) return m.reply(mess.botAdmin)
-				await m.reply(q ? q : '', { mentions: m.metadata.participants.map(a => a.id) })
+				try {
+					const members = m.metadata?.participants?.map(a => a.id) || []
+					await m.reply(q ? q : '', { mentions: members })
+				} catch(e) {
+					console.error('[hidetag error]', e?.message)
+					m.reply('❌ hidetag error: ' + e?.message)
+				}
 			}
 			break
 			case 'totag': {

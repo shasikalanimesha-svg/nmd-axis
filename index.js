@@ -417,8 +417,10 @@ async function startnimaBot() {
 			}, 30 * 1000)
 		}
 	} catch (e) {
-		console.log(e)
-		process.exit(1)
+		console.log('[startnimaBot error]', e)
+		console.log('🔄 30s කින් නැවත try කරමින්...')
+		setTimeout(() => startnimaBot(), 30000)
+		return
 	}
 	
 	const level = pino({ level: 'silent' });
